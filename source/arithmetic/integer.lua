@@ -1,23 +1,23 @@
-local __integer = {}
-__integer.__index = __integer
+local __integer = {__index = {}}
+local __integer_index = __integer.__index
 
 function __integer:__tostring()
 	return tostring(self.value)
 end
 
-function __integer:type()
+function __integer_index:type()
 	return arithmetic.node_terminal
 end
 
-function __integer:value_type()
+function __integer_index:value_type()
 	return arithmetic.value_integer
 end
 
-function __integer:get_value()
+function __integer_index:get_value()
 	return self.value
 end
 
-function __integer:calculate()
+function __integer_index:calculate()
 	return self.value
 end
 

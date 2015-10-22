@@ -1,23 +1,23 @@
-local __variable = {}
-__variable.__index = __variable
+local __variable = {__index = {}}
+local __variable_index = __variable.__index
 
 function __variable:__tostring()
 	return self.value
 end
 
-function __variable:type()
+function __variable_index:type()
 	return arithmetic.node_terminal
 end
 
-function __variable:value_type()
+function __variable_index:value_type()
 	return arithmetic.value_variable
 end
 
-function __variable:get_value()
+function __variable_index:get_value()
 	return self.value
 end
 
-function __variable:calculate()
+function __variable_index:calculate()
 	return 0
 end
 

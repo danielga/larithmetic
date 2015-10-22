@@ -1,5 +1,5 @@
-local __queue = {}
-__queue.__index = __queue
+local __queue = {__index = {}}
+local __queue_index = __queue.__index
 
 function __queue:__tostring()
 	local str = "{"
@@ -10,23 +10,23 @@ function __queue:__tostring()
 	return str .. "}"
 end
 
-function __queue:size()
+function __queue_index:size()
 	return #self.table
 end
 
-function __queue:empty()
+function __queue_index:empty()
 	return self:size() == 0
 end
 
-function __queue:push(item)
+function __queue_index:push(item)
 	self.table[self:size() + 1] = item
 end
 
-function __queue:top()
+function __queue_index:top()
 	return not self:empty() and self.table[1]
 end
 
-function __queue:pop()
+function __queue_index:pop()
 	if self:empty() then
 		return
 	end

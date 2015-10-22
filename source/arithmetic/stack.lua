@@ -1,5 +1,5 @@
-local __stack = {}
-__stack.__index = __stack
+local __stack = {__index = {}}
+local __stack_index = __stack.__index
 
 function __stack:__tostring()
 	local str = "{"
@@ -10,23 +10,23 @@ function __stack:__tostring()
 	return str .. "}"
 end
 
-function __stack:size()
+function __stack_index:size()
 	return #self.table
 end
 
-function __stack:empty()
+function __stack_index:empty()
 	return self:size() == 0
 end
 
-function __stack:push(item)
+function __stack_index:push(item)
 	self.table[self:size() + 1] = item
 end
 
-function __stack:top()
+function __stack_index:top()
 	return self.table[self:size()]
 end
 
-function __stack:pop()
+function __stack_index:pop()
 	local size = self:size()
 	if size == 0 then
 		return

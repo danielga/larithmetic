@@ -1,11 +1,11 @@
-local __reader = {}
-__reader.__index = __reader
+local __reader = {__index = {}}
+local __reader_index = __reader.__index
 
-function __reader:tell()
+function __reader_index:tell()
 	return self.offset
 end
 
-function __reader:seek(offset)
+function __reader_index:seek(offset)
 	if offset > #self.data then
 		offset = #self.data + 1
 	end
@@ -13,20 +13,20 @@ function __reader:seek(offset)
 	self.offset = offset
 end
 
-function __reader:eof()
+function __reader_index:eof()
 	return self.data == nil or self.offset > #self.data
 end
 
-function __reader:get()
+function __reader_index:get()
 	return self.data
 end
 
-function __reader:set(data)
+function __reader_index:set(data)
 	self.data = data
 	self.offset = 1
 end
 
-function __reader:read(num)
+function __reader_index:read(num)
 	if self:eof() then
 		return
 	end
@@ -37,7 +37,7 @@ function __reader:read(num)
 	return data
 end
 
-function __reader:peek(num)
+function __reader_index:peek(num)
 	if self:eof() then
 		return
 	end

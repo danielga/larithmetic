@@ -1,10 +1,10 @@
 -- fix the intermediary representation of data
 -- using numbers, and strings for operators is ridiculous
 
-local __parser = {}
-__parser.__index = __parser
+local __parser = {__index = {}}
+local __parser_index = __parser.__index
 
-function __parser:first_pass(str)
+function __parser_index:first_pass(str)
 	local outqueue = arithmetic.queue()
 	local tempstack = arithmetic.stack()
 	local reader = arithmetic.reader(str)
@@ -100,7 +100,7 @@ function __parser:first_pass(str)
 	return outqueue
 end
 
-function __parser:second_pass(queue)
+function __parser_index:second_pass(queue)
 	local tempstack = arithmetic.stack()
 
 	local top = queue:pop()
@@ -123,7 +123,7 @@ function __parser:second_pass(queue)
 	return tempstack:pop()
 end
 
-function __parser:parse(str)
+function __parser_index:parse(str)
 	if str == nil or #str == 0 then
 		return nil
 	end
